@@ -3,6 +3,6 @@
 {% block content %}
     <h1 class="new_guest">Добавить Новую Запись</h1>
     <form method="POST" action="{% url "add_guest" %}">
-    {% include 'partial/guest_form.html' with button_text='Add' %}
+        {% include 'partial/guest_form.html' with button_text='Add' %}
     </form>
 {% endblock %}

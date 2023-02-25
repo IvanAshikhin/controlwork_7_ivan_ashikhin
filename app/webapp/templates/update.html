@@ -2,7 +2,7 @@
 {% block title %}Edit{% endblock %}
 {% block content %}
     <h1 class="new_guest">Редактировать Запись</h1>
-    <form method="POST" action="{% url "add_guest" %}">
-    {% include 'partial/guest_form.html' with button_text='Сохранить' %}
+    <form method="POST" action="{% url 'guest_update' guest.pk %}">
+        {% include 'partial/guest_form.html' with button_text='Сохранить' %}
     </form>
 {% endblock %}

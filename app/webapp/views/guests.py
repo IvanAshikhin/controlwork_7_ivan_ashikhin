@@ -1,6 +1,7 @@
+from datetime import datetime
+
 from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 
 from webapp.forms import GuestForm
 from webapp.models import GuestBook
@@ -31,10 +32,15 @@ def confirm_delete(request, pk):
 
 def update_view(request, pk):
     guest = get_object_or_404(GuestBook, pk=pk)
-    if request.method == "POST":
-        guest.name = request.POST.get('name')
-        guest.email = request.POST.get('email')
-        guest.text = re
-        guest.save()
-        return redirect('detail_task', pk=guest.pk)
-    return render(requset, 'update.html', context={'guest': guest})
+    if request.method == 'GET':
+        form = GuestForm(instance=guest)
+        return render(request, 'update.html', {'form': form, 'guest': guest})
+    elif request.method == 'POST':
+        form = GuestForm(request.POST, instance=guest)
+        if form.is_valid():
+            guest = form.save(commit=False)
+            guest.edit_time = datetime.now()
+            guest.save()
+            return redirect('index_page')
+        else:
+            return render(request, 'update.html', {'form': form, 'guest': guest})
