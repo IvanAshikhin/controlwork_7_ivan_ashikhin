@@ -3,10 +3,15 @@
     margin: 0 auto;
 }
 
+.submit_delete{
+    display: inline;
+}
+
 .home_page {
+    margin-left: 10px;
     background-color: #212529;
     color: #fff;
-    padding: 10px 20px;
+    padding: 13px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -50,6 +55,6 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
-    background-color: #3e8e41;
+.upgrade {
+    text-decoration: none;
 }
