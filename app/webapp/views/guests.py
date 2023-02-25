@@ -19,5 +19,22 @@ def add_view(request: WSGIRequest):
 
 
 def delete_view(request, pk):
-    article = get_object_or_404(Article, pk=pk)
-    return render(request, 'article_confitm_delete.html', context={"article": article})
+    guest = get_object_or_404(GuestBook, pk=pk)
+    return render(request, 'confirm_delete.html', context={"guest": guest})
+
+
+def confirm_delete(request, pk):
+    guest = get_object_or_404(GuestBook, pk=pk)
+    guest.delete()
+    return redirect('index_page')
+
+
+def update_view(request, pk):
+    guest = get_object_or_404(GuestBook, pk=pk)
+    if request.method == "POST":
+        guest.name = request.POST.get('name')
+        guest.email = request.POST.get('email')
+        guest.text = re
+        guest.save()
+        return redirect('detail_task', pk=guest.pk)
+    return render(requset, 'update.html', context={'guest': guest})
